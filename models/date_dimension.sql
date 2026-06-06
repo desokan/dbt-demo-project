@@ -5,16 +5,8 @@ WITH CTES AS (
       HOUR(TO_TIMESTAMP(STARTED_AT)) AS HOUR_STARTED_AT,
       DAYOFWEEK(TO_TIMESTAMP(STARTED_AT)) AS DAY_OF_WEEK_STARTED_AT,
       MONTH(TO_TIMESTAMP(STARTED_AT)) AS MONTH_STARTED_AT,
-      CASE 
-        WHEN DAYNAME(TO_TIMESTAMP(STARTED_AT)) IN ('Sat', 'Sun') THEN 'weekend'
-        ELSE 'business day'
-      END AS DAY_TYPE,
-      CASE 
-        WHEN MONTH(TO_TIMESTAMP(STARTED_AT)) IN (12, 1, 2) THEN 'winter'
-        WHEN MONTH(TO_TIMESTAMP(STARTED_AT)) IN (3, 4, 5) THEN 'spring'
-        WHEN MONTH(TO_TIMESTAMP(STARTED_AT)) IN (6, 7, 8) THEN 'summer'
-        ELSE 'autumn'
-      END AS SEASON_OF_YEAR
+      {{ day_type('STARTED_AT') }} AS DAY_TYPE,
+      {{ get_season('STARTED_AT') }} AS SEASON_OF_YEAR
     FROM {{ source('demo', 'bike') }}
     WHERE STARTED_AT != 'started_at'
 )
