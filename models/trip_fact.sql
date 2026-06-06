@@ -1,3 +1,4 @@
+
 WITH TRIPS as (
     SELECT
         RIDE_ID,
