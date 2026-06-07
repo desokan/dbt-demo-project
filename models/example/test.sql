@@ -1,3 +1,3 @@
-SELECT *
-FROM {{source('demo', 'bike')}}
-LIMIT 10;
+-- SELECT *
+-- FROM {{source('demo', 'bike')}}
+-- LIMIT 10;
