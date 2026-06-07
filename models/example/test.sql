@@ -1,3 +1,4 @@
--- SELECT *
+SELECT *
 -- FROM {{source('demo', 'bike')}}
--- LIMIT 10;
+FROM {{ ref('stg_bike') }}
+LIMIT 10;
